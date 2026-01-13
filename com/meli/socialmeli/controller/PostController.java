@@ -2,8 +2,10 @@ package com.meli.socialmeli.controller;
 
 import com.meli.socialmeli.model.Post;
 import com.meli.socialmeli.service.PostService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -18,13 +20,13 @@ public class PostController {
 
     @PostMapping("/publish")
     public ResponseEntity<Void> publishPost(@RequestBody Post post) {
-        postService.savePost(post);
-        return ResponseEntity.ok().build();
+        this.postService.savePost(post);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<Post>> getFollowedList(@PathVariable Integer userId) {
-        List<Post> posts = postService.getFollowedPosts(userId);
-        return ResponseEntity.ok(posts);
+    public ResponseEntity<List<Post>> getFollowedPosts(@PathVariable Integer userId) {
+        List<Post> followedPosts = this.postService.getFollowedPosts(userId);
+        return new ResponseEntity<>(followedPosts, HttpStatus.OK);
     }
 }

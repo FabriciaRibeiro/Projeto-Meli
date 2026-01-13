@@ -12,7 +12,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId; // O Banco de dados gera este ID automaticamente.
-
     private String userName; // Nome do usuário, limitado a 15 caracteres.
 
     @ElementCollection
